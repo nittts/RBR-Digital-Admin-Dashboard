@@ -7,6 +7,7 @@ import { errorHandling } from "./middlewares/asyncErrors.middleware";
 import rateLimiterMiddleware from "./middlewares/raterLimiter.middleware";
 
 import routes from "./routes";
+import connectMongo from "./database/mongo";
 
 config();
 const app = express();
@@ -25,6 +26,9 @@ app.use(errorHandling);
 
 // Protect the app!
 app.use(helmet());
+
+// Initiate Database Connection
+//connectMongo();
 
 routes(app);
 
