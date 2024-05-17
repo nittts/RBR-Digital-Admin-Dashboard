@@ -25,6 +25,14 @@ class EmployeesController {
 
     return res.status(201).send(employee);
   }
+
+  async update(req: Request, res: Response) {
+    const { body, params } = req;
+
+    const employee = await employeesService.update(body, { id: params.id });
+
+    return res.status(200).send(employee);
+  }
 }
 
 export default new EmployeesController();
