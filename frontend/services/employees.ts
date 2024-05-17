@@ -1,4 +1,4 @@
-import { EmployeeFilters } from "@/@types/employees.types";
+import { CreateEmployeePayload, Employee, EmployeeFilters } from "@/@types/employees.types";
 import api from "./api";
 
 const handleFilters = (filters?: EmployeeFilters) => {
@@ -18,8 +18,14 @@ const handleFilters = (filters?: EmployeeFilters) => {
   return params;
 };
 
-export const getEmployees = async (filters?: EmployeeFilters) => {
+export const getEmployees = async (filters?: EmployeeFilters): Promise<Employee[]> => {
   const response = await api.get("/api/employees", { params: handleFilters(filters) });
+
+  return response.data;
+};
+
+export const createEmployee = async (payload: CreateEmployeePayload): Promise<Employee> => {
+  const response = await api.post("/api/employees", payload);
 
   return response.data;
 };

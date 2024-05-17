@@ -7,6 +7,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Providers from "@/provider";
+import Header from "@/components/Header";
+import { Flex } from "@chakra-ui/react";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
@@ -19,7 +21,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="pt-BR">
       <body className={roboto.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          <Flex direction="column" gap={3} alignItems="center" paddingX="1vw">
+            {children}
+          </Flex>
+        </Providers>
       </body>
     </html>
   );

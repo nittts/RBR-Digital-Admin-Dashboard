@@ -9,5 +9,5 @@ export default function ThemeProvider({ children }: ProviderProps) {
 
   const theme = extendTheme({ config });
 
-  return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
+  return <ChakraProvider theme={theme} portalZIndex={40}>{children}</ChakraProvider>;
 }

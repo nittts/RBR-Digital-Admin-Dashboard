@@ -15,3 +15,10 @@ export type EmployeeFilters = {
   admissionDate?: Date;
   department?: Departments;
 };
+
+export type CreateEmployeePayload = {
+  name: string;
+  role: Roles;
+  admissionDate: Date;
+  department: Departments;
+};

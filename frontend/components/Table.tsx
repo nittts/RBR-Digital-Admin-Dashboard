@@ -40,7 +40,6 @@ export default function Table(props: TableProps) {
     lg: false,
     xl: false,
     "2xl": false,
-    "3xl": false,
   });
 
   const generateColumns = () => {
