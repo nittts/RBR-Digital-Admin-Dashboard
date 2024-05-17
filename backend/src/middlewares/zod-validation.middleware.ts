@@ -20,7 +20,7 @@ export const ZodValidator =
     const parsedData = schema.safeParse(data);
 
     if (parsedData.success) {
-      req[metadataType] = parsedData;
+      req[metadataType] = parsedData.data;
       next();
     } else {
       const zodError = parsedData.error as ZodError;

@@ -14,6 +14,8 @@ const errorHandling = (err: Error, req: Request, res: Response, next: NextFuncti
     res.status(err.statusCode).json({ message: err.message, statusCode: err.statusCode });
   }
 
+  console.log(err)
+
   res.status(500).json({ message: "Erro de Servidor Interno.", statusCode: 500 });
 };
 
