@@ -8,7 +8,14 @@ import {
 } from "../../@types/employees.types";
 
 class EmployeesService {
-  async findAll(filters: EmployeesSearchParams) {
+  async findAll(params: EmployeesSearchParams) {
+    const filters: { [x: string]: { $regex: string; $options: string } | Date } = {};
+
+    if (params.name) filters.name = { $regex: params.name, $options: "i" };
+    if (params.department) filters.department = { $regex: params.department, $options: "i" };
+    if (params.role) filters.role = { $regex: params.role, $options: "i" };
+    if (params.admissionDate) filters.admissionDate = params.admissionDate;
+
     return await employeesModel.find(filters);
   }
 
@@ -21,7 +28,7 @@ class EmployeesService {
   }
 
   async create(payload: CreateEmployeePayload) {
-    console.log(payload)
+    console.log(payload);
     const employee = await employeesModel.create(payload);
 
     return employee;
