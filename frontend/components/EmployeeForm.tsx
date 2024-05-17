@@ -110,6 +110,7 @@ export default function EmployeeForm({ onFinish, promiseStatus, initialValues }:
           type="submit"
           isLoading={isLoading}
           width="100%"
+          color="white"
         >
           Finalizar
         </Button>

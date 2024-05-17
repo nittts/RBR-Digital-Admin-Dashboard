@@ -1,7 +1,10 @@
 "use client";
 
-import { Employee } from "@/@types/employees.types";
+import { Employee, EmployeeFilters } from "@/@types/employees.types";
+import { Columns } from "@/@types/table.types";
 import DeleteButton from "@/components/DeleteButton";
+import DepartmentTag from "@/components/DepartmentTag";
+import RoleTag from "@/components/RoleTag";
 import Table from "@/components/Table";
 import { Departments } from "@/enums/deparments.enum";
 import { Roles } from "@/enums/roles.enum";
@@ -9,11 +12,15 @@ import { useDeleteEmployee, useGetEmployees } from "@/hooks/employees";
 import { departmentsToPt } from "@/mappers/departments";
 import { rolesToPt } from "@/mappers/roles";
 import { formatterUtils } from "@/utils/formatters";
-import { Button, Flex, useToast } from "@chakra-ui/react";
+import { Button, Flex, OrderedList, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
-const columns = [
+type EmployeesTableProps = {
+  filters: EmployeeFilters;
+};
+
+const columns: Columns[] = [
   {
     key: "name",
     header: "Nome",
@@ -21,12 +28,12 @@ const columns = [
   {
     key: "role",
     header: "Cargo",
-    format: (role: Roles) => rolesToPt(role, true),
+    format: (role: Roles) => <RoleTag tag={role} />,
   },
   {
     key: "department",
     header: "Departamento",
-    format: (department: Departments) => departmentsToPt(department, true),
+    format: (department: Departments) => <DepartmentTag tag={department} />,
   },
   {
     key: "admissionDate",
@@ -36,11 +43,12 @@ const columns = [
   {
     key: "actions",
     header: "Ações",
+    disableOrder: false,
   },
 ];
 
-export default function EmployeesTable() {
-  const { employees } = useGetEmployees({});
+export default function EmployeesTable({ filters }: EmployeesTableProps) {
+  const { employees, getEmployeesStatus } = useGetEmployees(filters);
   const { deleteEmployee, deleteEmployeeError } = useDeleteEmployee();
 
   const toast = useToast();
@@ -59,7 +67,7 @@ export default function EmployeesTable() {
 
   const rows = useMemo(
     () =>
-      employees.map((employee: Employee) => ({
+      employees?.map((employee: Employee) => ({
         ...employee,
         actions: (
           <Flex gap={2}>
@@ -67,6 +75,7 @@ export default function EmployeesTable() {
               background="blue.500"
               _hover={{ backgroundColor: "blue.300" }}
               onClick={() => router.push(`/${employee.id}`)}
+              color="white"
             >
               Editar
             </Button>
@@ -85,12 +94,13 @@ export default function EmployeesTable() {
   return (
     <Table
       columns={columns}
-      rows={rows}
+      rows={rows || []}
       caption="Funcionários"
       variant="striped"
-      colorScheme="blue"
+      colorScheme="gray"
       noDataMessage="Sem funcionários cadastrados"
       size="md"
+      fetching={getEmployeesStatus === "pending"}
     />
   );
 }

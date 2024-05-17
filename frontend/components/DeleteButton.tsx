@@ -27,7 +27,7 @@ export default function DeleteButton({ trigger, header, description, onConfirm, 
   return (
     <Popover isOpen={isOpen}>
       <PopoverTrigger>
-        <Button colorScheme="red" onClick={onToggle}>
+        <Button background="red.500" color="white" _hover={{ backgroundColor: "red.300" }} onClick={onToggle}>
           {trigger}
         </Button>
       </PopoverTrigger>
@@ -39,11 +39,18 @@ export default function DeleteButton({ trigger, header, description, onConfirm, 
           <VStack gap={2}>
             <Text>{description}</Text>
             <HStack>
-              <Button colorScheme="green" onClick={onConfirm}>
+              <Button
+                background="green.500"
+                _hover={{ backgroundColor: "green.300" }}
+                color="white"
+                onClick={onConfirm}
+              >
                 Confirmar
               </Button>
               <Button
-                colorScheme="red"
+                background="red.500"
+                _hover={{ backgroundColor: "red.300" }}
+                color="white"
                 onClick={() => {
                   if (onCancel) onCancel();
                   onClose();
