@@ -1,13 +1,24 @@
 "use client";
 
 import { ProviderProps } from "@/@types/providers.types";
-import { useConfig } from "@/stores/theme.store";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { ChakraProvider, Theme, ThemeConfig, extendTheme, theme, useColorMode } from "@chakra-ui/react";
 
 export default function ThemeProvider({ children }: ProviderProps) {
-  const config = useConfig();
+  const colorMode = useColorMode();
 
-  const theme = extendTheme({ config });
+  const styles = { global: {} };
 
-  return <ChakraProvider theme={theme} portalZIndex={40}>{children}</ChakraProvider>;
+  if (colorMode.colorMode === "light") {
+    styles.global = { body: { bg: "gray.300" } };
+  }
+
+  const customizedTheme = extendTheme({
+    styles: {},
+  });
+
+  return (
+    <ChakraProvider theme={customizedTheme} portalZIndex={40}>
+      {children}
+    </ChakraProvider>
+  );
 }

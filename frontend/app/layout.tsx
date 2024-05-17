@@ -9,6 +9,7 @@ import "@fontsource/roboto/700.css";
 import Providers from "@/provider";
 import Header from "@/components/Header";
 import { Flex } from "@chakra-ui/react";
+import BackButton from "@/components/BackButton";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <Flex direction="column" gap={3} alignItems="center" paddingX="1vw">
             {children}
           </Flex>
+          <BackButton />
         </Providers>
       </body>
     </html>

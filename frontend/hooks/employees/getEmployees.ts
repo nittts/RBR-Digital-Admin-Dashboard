@@ -10,7 +10,6 @@ const useGetEmployees = (filters?: EmployeeFilters) => {
   const { data, status, error } = useQuery({
     queryKey: [EMPLOYEES_QUERY_ID, filters],
     queryFn: () => getEmployees(filters),
-    initialData: [],
   });
 
   return {

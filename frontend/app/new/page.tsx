@@ -10,7 +10,7 @@ export default function EmployeeCreatePage() {
   const onSubmit = () => router.back();
 
   return (
-    <Card>
+    <Card shadow="lg" variant="outline">
       <CardHeader>Criar funcionário</CardHeader>
       <CardBody>
         <CreateEmployeeForm onSubmit={onSubmit} />

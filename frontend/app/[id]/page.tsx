@@ -37,7 +37,7 @@ export default function EditEmployeePage() {
   }
 
   return (
-    <Card>
+    <Card shadow="lg" variant="outline">
       <CardHeader>Editar funcionário</CardHeader>
       <CardBody>
         <EditEmployeeForm onSubmit={onSubmit} initialValues={employee} />
