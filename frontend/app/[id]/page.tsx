@@ -2,7 +2,7 @@
 
 import EditEmployeeForm from "@/components/EditEmployeeForm";
 import FetchResult from "@/components/FetchResult";
-import useGetEmployeeById from "@/hooks/employees/getEmployeeById";
+import { useGetEmployeeById } from "@/hooks/employees";
 import { Button, Card, CardBody, CardHeader } from "@chakra-ui/react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -13,8 +13,6 @@ export default function EditEmployeePage() {
   const router = useRouter();
 
   const onSubmit = () => router.back();
-
-  console.log(getEmployeeError);
 
   if (getEmployeeError) {
     return (

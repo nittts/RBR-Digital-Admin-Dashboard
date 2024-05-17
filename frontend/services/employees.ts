@@ -43,3 +43,9 @@ export const editEmployee = async (payload: EditEmployeePayload): Promise<Employ
 
   return response.data;
 };
+
+export const deleteEmployee = async (id: string): Promise<Employee> => {
+  const response = await api.delete(`api/employees/${id}`);
+
+  return response.data;
+};

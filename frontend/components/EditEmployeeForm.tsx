@@ -3,7 +3,7 @@
 import { Employee, EmployeePayload } from "@/@types/employees.types";
 import { useToast } from "@chakra-ui/react";
 import EmployeeForm from "./EmployeeForm";
-import useEditEmployee from "@/hooks/employees/editEmployee";
+import { useEditEmployee } from "@/hooks/employees";
 
 export default function EditEmployeeForm({
   onSubmit,
