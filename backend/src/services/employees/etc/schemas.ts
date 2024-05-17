@@ -12,3 +12,9 @@ export const employeesSearchParams = z.object({
 export const findById = z.object({
   id: z.string({ message: "ID deve ser válido." }).uuid({ message: "ID deve ser um UUID válido." }),
 });
+
+export const createEmployeePayload = z.object({
+  name: z.string({ message: "O nome deve ser um texto válido." }),
+  role: z.nativeEnum(Roles, { message: "Cargo do funcionário inválido." }),
+  department: z.nativeEnum(Departments, { message: "Departamento inválido ou inexistente" }),
+});

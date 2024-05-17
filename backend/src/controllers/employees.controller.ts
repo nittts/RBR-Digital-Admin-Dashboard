@@ -17,6 +17,14 @@ class EmployeesController {
 
     return res.status(200).send(employee);
   }
+
+  async create(req: Request, res: Response) {
+    const { body } = req;
+
+    const employee = await employeesService.create(body);
+
+    return res.status(201).send(employee);
+  }
 }
 
 export default new EmployeesController();
