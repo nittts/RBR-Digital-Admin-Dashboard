@@ -16,9 +16,11 @@ export type EmployeeFilters = {
   department?: Departments;
 };
 
-export type CreateEmployeePayload = {
+export type EmployeePayload = {
   name: string;
   role: Roles;
   admissionDate: Date;
   department: Departments;
 };
+
+export type EditEmployeePayload = { id: string } & EmployeePayload;

@@ -8,17 +8,16 @@ const useEditEmployee = () => {
   const queryClient = useQueryClient();
 
   const onSuccess = (editedEmployee: Employee) => {
-    queryClient.setQueriesData<Employee[]>({ queryKey: [EMPLOYEES_QUERY_ID] }, (oldData) => {
-      if (oldData)
-        return oldData.map((employee) => {
-          return employee.id === editedEmployee.id ? editedEmployee : employee;
-        });
-
+    queryClient.setQueriesData<Employee[]>({ queryKey: [EMPLOYEES_QUERY_ID] }, () => {
       return [editedEmployee];
     });
   };
 
-  const { mutateAsync, status, error } = useMutation({ mutationFn: editEmployeeSvc, onSuccess });
+  const { mutateAsync, status, error } = useMutation({
+    mutationFn: editEmployeeSvc,
+    onSuccess,
+    onError: (error) => console.log(error),
+  });
 
   return {
     editEmployee: mutateAsync,

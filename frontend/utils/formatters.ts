@@ -15,13 +15,14 @@ export class formatterUtils {
 
   public static formatError(error: Error | unknown) {
     if (!error) return undefined;
-    if (
-      axios.isAxiosError(error) &&
-      error.response &&
-      error.response.data !== null &&
-      typeof error.response.data === "object" &&
-      "message" in error.response.data
-    ) {
+
+    if (axios.isAxiosError(error) && error.response && typeof error.response.data === "object") {
+      const { message, error: errors } = error.response.data;
+
+      if (message === "ValidationError" && errors) {
+        return Object.values(errors).join(",");
+      }
+
       return error.response.data.message;
     }
   }

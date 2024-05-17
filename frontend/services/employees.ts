@@ -1,4 +1,4 @@
-import { CreateEmployeePayload, Employee, EmployeeFilters } from "@/@types/employees.types";
+import { EmployeePayload, Employee, EmployeeFilters, EditEmployeePayload } from "@/@types/employees.types";
 import api from "./api";
 
 const handleFilters = (filters?: EmployeeFilters) => {
@@ -24,8 +24,22 @@ export const getEmployees = async (filters?: EmployeeFilters): Promise<Employee[
   return response.data;
 };
 
-export const createEmployee = async (payload: CreateEmployeePayload): Promise<Employee> => {
+export const getEmployeeById = async (id: string): Promise<Employee> => {
+  const response = await api.get(`/api/employees/${id}`);
+
+  return response.data;
+};
+
+export const createEmployee = async (payload: EmployeePayload): Promise<Employee> => {
   const response = await api.post("/api/employees", payload);
+
+  return response.data;
+};
+
+export const editEmployee = async (payload: EditEmployeePayload): Promise<Employee> => {
+  const { id, ...rest } = payload;
+
+  const response = await api.put(`/api/employees/${id}`, rest);
 
   return response.data;
 };

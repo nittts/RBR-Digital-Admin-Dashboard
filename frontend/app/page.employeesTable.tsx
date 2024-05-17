@@ -9,6 +9,7 @@ import { departmentsToPt } from "@/mappers/departments";
 import { rolesToPt } from "@/mappers/roles";
 import { formatterUtils } from "@/utils/formatters";
 import { Button, Flex } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 
 const columns = [
@@ -40,13 +41,19 @@ const columns = [
 export default function EmployeesTable() {
   const { employees } = useGetEmployees({});
 
+  const router = useRouter();
+
   const rows = useMemo(
     () =>
       employees.map((employee: Employee) => ({
         ...employee,
         actions: (
           <Flex gap={2}>
-            <Button background="blue.500" _hover={{ backgroundColor: "blue.300" }}>
+            <Button
+              background="blue.500"
+              _hover={{ backgroundColor: "blue.300" }}
+              onClick={() => router.push(`/${employee.id}`)}
+            >
               Editar
             </Button>
             <Button background="red.500" _hover={{ backgroundColor: "red.300" }}>
@@ -55,7 +62,7 @@ export default function EmployeesTable() {
           </Flex>
         ),
       })),
-    [employees]
+    [employees, router]
   );
 
   return (
