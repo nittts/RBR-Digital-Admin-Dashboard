@@ -1,6 +1,7 @@
 import { Employee } from "@/@types/employees.types";
 import { EMPLOYEES_QUERY_ID } from "@/constants/queryKeys.constants";
 import { createEmployee as createEmployeeSvc } from "@/services/employees";
+import { formatterUtils } from "@/utils/formatters";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useCreateEmployee = () => {
@@ -14,13 +15,13 @@ const useCreateEmployee = () => {
     });
   };
 
-  const {
-    mutateAsync: createEmployee,
-    status: createEmployeeStatus,
-    error: createEmployeeError,
-  } = useMutation({ mutationFn: createEmployeeSvc, onSuccess });
+  const { mutateAsync, status, error } = useMutation({ mutationFn: createEmployeeSvc, onSuccess });
 
-  return { createEmployee, createEmployeeStatus, createEmployeeError };
+  return {
+    createEmployee: mutateAsync,
+    createEmployeeStatus: status,
+    createEmployeeError: formatterUtils.formatError(error),
+  };
 };
 
 export default useCreateEmployee;
