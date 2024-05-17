@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Departments } from "../enums/departments.enum";
-import { Roles } from "../enums/roles.enum";
 
 const EmployeeSchema = new mongoose.Schema({
   name: {
@@ -8,17 +7,19 @@ const EmployeeSchema = new mongoose.Schema({
     required: true,
   },
   role: {
-    enum: Roles,
+    type: String,
+    enum: ["MANAGER", "SUPERVISOR", "EMPLOYEE"],
     required: true,
   },
   department: {
-    enum: Departments,
+    type: String,
+    enum: ["HR", "IT", "SALES", "FINANCES", "MARKETING", "MANAGEMENT", "PRD"],
     required: true,
   },
   admissionDate: {
     type: Date,
-    required: true,
     default: Date.now,
+    required: true,
   },
 });
 

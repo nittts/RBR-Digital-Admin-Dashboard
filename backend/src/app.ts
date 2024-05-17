@@ -21,16 +21,17 @@ app.use(rateLimiterMiddleware);
 // Cors protection and headers
 app.use(cors());
 
-// Async error Handling
-app.use(errorHandling);
-
 // Protect the app!
 app.use(helmet());
 
 // Initiate Database Connection
-//connectMongo();
+connectMongo();
 
+// Define routes
 routes(app);
+
+// Async error Handling
+app.use(errorHandling);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Server Running!");

@@ -1,0 +1,106 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-05-17T00:27:44.218Z",
+  "__export_source": "insomnia.desktop.app:v9.1.1",
+  "resources": [
+    {
+      "_id": "req_62cfd40f350647289bd14f90f71e9dcf",
+      "parentId": "fld_a47c195c93c34a8f89356442e15d7185",
+      "modified": 1715905567061,
+      "created": 1715903994614,
+      "url": "{{baseURL}}/api/employees",
+      "name": "Get Employees",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "preRequestScript": "",
+      "parameters": [
+        {
+          "id": "pair_acb5ea59ad2e4bf0a374de6a119c719f",
+          "name": "name",
+          "value": "",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_1c8799d34673455ea7429f96b61dc57a",
+          "name": "admissionDate",
+          "value": "",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_314ea7e142c64f168ca6c06d06b6895a",
+          "name": "department",
+          "value": "",
+          "description": "",
+          "disabled": true
+        },
+        {
+          "id": "pair_659b562a59e840ff86265f682dab96b2",
+          "name": "role",
+          "value": "",
+          "description": "",
+          "disabled": true
+        }
+      ],
+      "headers": [{ "name": "User-Agent", "value": "insomnia/9.1.1" }],
+      "authentication": {},
+      "metaSortKey": -1715903996917,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_a47c195c93c34a8f89356442e15d7185",
+      "parentId": "wrk_4cf4bca9f65f4c7ea4f5d19dfda2e980",
+      "modified": 1715904001037,
+      "created": 1715903992861,
+      "name": "Employees",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1715903992861,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_4cf4bca9f65f4c7ea4f5d19dfda2e980",
+      "parentId": null,
+      "modified": 1715903893756,
+      "created": 1715903893756,
+      "name": "RDB Admin Panel",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_c046d92189b764eba04c8d68419b74109fbe1c2e",
+      "parentId": "wrk_4cf4bca9f65f4c7ea4f5d19dfda2e980",
+      "modified": 1715903982746,
+      "created": 1715903893758,
+      "name": "Base Environment",
+      "data": { "baseURL": "http://localhost:3000" },
+      "dataPropertyOrder": { "&": ["baseURL"] },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1715903893758,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_c046d92189b764eba04c8d68419b74109fbe1c2e",
+      "parentId": "wrk_4cf4bca9f65f4c7ea4f5d19dfda2e980",
+      "modified": 1715903893759,
+      "created": 1715903893759,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    }
+  ]
+}
