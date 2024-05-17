@@ -33,6 +33,14 @@ class EmployeesController {
 
     return res.status(200).send(employee);
   }
+
+  async delete(req: Request, res: Response) {
+    const { params } = req;
+
+    const employee = await employeesService.delete({ id: params.id });
+
+    return res.status(200).send(employee);
+  }
 }
 
 export default new EmployeesController();

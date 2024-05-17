@@ -30,6 +30,14 @@ class EmployeesService {
 
     return employee;
   }
+
+  async delete(id: FindById) {
+    const employee = await employeesModel.findOneAndDelete(id);
+
+    if (!employee) throw new AppError("Funcionário não encontrado.", 404);
+
+    return employee;
+  }
 }
 
 export default new EmployeesService();

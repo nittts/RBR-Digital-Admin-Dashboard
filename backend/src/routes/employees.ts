@@ -26,5 +26,7 @@ export default (router: Router) => {
     employeesController.update
   );
 
+  router.delete('/:id', ZodValidator(findById, "params"), employeesController.delete)
+
   return router;
 };
