@@ -1,0 +1,46 @@
+services:
+  frontend:
+    container_name: admin_panel_web
+    build: ./frontend
+    depends_on:
+      - api
+    links:
+      - api
+    ports:
+      - 3000:3000
+    networks:
+      - network-admin-panel
+    env_file:
+      - ./frontend/docker.env
+
+  mongo:
+    container_name: admin_panel_database
+    image: mongodb/mongodb-community-server:latest
+    hostname: mongodb
+    ports:
+      - 27017:27017
+    networks:
+      - network-admin-panel
+    volumes:
+      - mongodata:/data/db
+
+  api:
+    build: ./backend
+    container_name: admin_panel_api
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    ports:
+      - 8080:8080
+    env_file:
+      - ./backend/docker.env
+    networks:
+      - network-admin-panel
+    restart: always
+
+networks:
+  network-admin-panel:
+
+volumes:
+  mongodata:

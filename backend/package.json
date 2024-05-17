@@ -12,7 +12,9 @@
     "typescript": "^5.4.5"
   },
   "scripts": {
-    "dev": "ts-node-dev src/index.ts --watch"
+    "dev": "ts-node-dev src/index.ts --watch",
+    "build": "tsc --build",
+    "start": "node ./build/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
