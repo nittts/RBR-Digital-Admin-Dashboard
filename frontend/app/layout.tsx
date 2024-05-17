@@ -9,7 +9,6 @@ import "@fontsource/roboto/700.css";
 import Providers from "@/provider";
 import Header from "@/components/Header";
 import { Flex } from "@chakra-ui/react";
-import BackButton from "@/components/BackButton";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
