@@ -1,21 +1,24 @@
 "use client";
 
+import { Button, Flex, useToast } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import { useCallback, useMemo } from "react";
+import { BiEdit } from "react-icons/bi";
+
 import { Employee, EmployeeFilters } from "@/@types/employees.types";
 import { Columns } from "@/@types/table.types";
+
 import DeleteButton from "@/components/DeleteButton";
 import DepartmentTag from "@/components/DepartmentTag";
 import RoleTag from "@/components/RoleTag";
 import Table from "@/components/Table";
+
 import { Departments } from "@/enums/deparments.enum";
 import { Roles } from "@/enums/roles.enum";
+
 import { useDeleteEmployee, useGetEmployees } from "@/hooks/employees";
-import { departmentsToPt } from "@/mappers/departments";
-import { rolesToPt } from "@/mappers/roles";
+
 import { formatterUtils } from "@/utils/formatters";
-import { Button, Flex, OrderedList, useToast } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
-import { BiEdit } from "react-icons/bi";
 
 type EmployeesTableProps = {
   filters: EmployeeFilters;

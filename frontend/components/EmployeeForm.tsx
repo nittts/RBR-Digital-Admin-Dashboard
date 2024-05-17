@@ -1,12 +1,17 @@
-import { EmployeePayload } from "@/@types/employees.types";
-import { Departments } from "@/enums/deparments.enum";
-import { Roles } from "@/enums/roles.enum";
-import { departmentsToPt } from "@/mappers/departments";
-import { rolesToPt } from "@/mappers/roles";
-import { CreateEmployeForm, createEmployeeForm } from "@/schemas/createEmployeeForm";
 import { Button, FormControl, FormErrorMessage, FormLabel, Input, Select, Stack, StackDivider } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { ZodError } from "zod";
+
+import { EmployeePayload } from "@/@types/employees.types";
+
+import { Departments } from "@/enums/deparments.enum";
+import { Roles } from "@/enums/roles.enum";
+
+import { departmentsToPt } from "@/mappers/departments";
+import { rolesToPt } from "@/mappers/roles";
+
+import { CreateEmployeForm, createEmployeeForm } from "@/schemas/createEmployeeForm";
+
 import { SingleDatepicker } from "./DatePicker";
 
 type EmployeesFormProps = {

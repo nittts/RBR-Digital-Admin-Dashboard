@@ -1,8 +1,10 @@
 "use client";
 
-import { EmployeePayload } from "@/@types/employees.types";
 import { useToast } from "@chakra-ui/react";
+
+import { EmployeePayload } from "@/@types/employees.types";
 import { useCreateEmployee } from "@/hooks/employees";
+
 import EmployeeForm from "./EmployeeForm";
 
 export default function CreateEmployeeForm({ onSubmit }: { onSubmit: () => void }) {

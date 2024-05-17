@@ -1,6 +1,6 @@
 "use client";
 
-import { FormControl, FormLabel, Heading, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
 import { BiSearch } from "react-icons/bi";
 
 type EmployeeSearchProps = {

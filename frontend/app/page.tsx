@@ -1,12 +1,12 @@
 "use client";
 
+import { useDebounce } from "@uidotdev/usehooks";
 import { Card, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 
 import EmployeesTable from "./page.employeesTable";
 import EmployeesSearch from "./page.employeesSearch";
 import EmployeesCreate from "./page.employeesCreate";
-import { useDebounce } from "@uidotdev/usehooks";
 
 export default function Home() {
   const [searchParam, setsearchParam] = useState("");

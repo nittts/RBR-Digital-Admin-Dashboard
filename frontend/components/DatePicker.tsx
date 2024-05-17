@@ -1,7 +1,9 @@
-import * as React from "react";
+import { useRef, useState } from "react";
 import { Input, Popover, PopoverBody, PopoverContent, PopoverTrigger, Portal, useOutsideClick } from "@chakra-ui/react";
+
 import { useDayzed } from "dayzed";
 import dayjs from "dayjs";
+
 import DatePickerCalendar from "./DatePicker.calendar";
 
 const DATE_FORMAT = "DD/MM/YYYY";
@@ -15,11 +17,11 @@ export interface SingleDatepickerProps {
 export const SingleDatepicker = (props: SingleDatepickerProps) => {
   const { value, disabled, onChange } = props;
 
-  const ref = React.useRef<HTMLElement>(null);
-  const initialFocusRef = React.useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLElement>(null);
+  const initialFocusRef = useRef<HTMLInputElement>(null);
 
-  const [proposedDate, setProposedDate] = React.useState<string>(value ? dayjs(value).format(DATE_FORMAT) : "");
-  const [popoverOpen, setPopoverOpen] = React.useState(false);
+  const [proposedDate, setProposedDate] = useState<string>(value ? dayjs(value).format(DATE_FORMAT) : "");
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
   useOutsideClick({
     ref: ref,

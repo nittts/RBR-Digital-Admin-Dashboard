@@ -1,8 +1,11 @@
 "use client";
 
-import { Employee, EmployeePayload } from "@/@types/employees.types";
 import { useToast } from "@chakra-ui/react";
+
+import { Employee, EmployeePayload } from "@/@types/employees.types";
+
 import EmployeeForm from "./EmployeeForm";
+
 import { useEditEmployee } from "@/hooks/employees";
 
 export default function EditEmployeeForm({

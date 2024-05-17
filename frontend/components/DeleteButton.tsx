@@ -41,6 +41,7 @@ export default function DeleteButton({ trigger, header, description, onConfirm, 
       <PopoverContent>
         <PopoverArrow />
         <PopoverCloseButton />
+
         <PopoverHeader fontWeight="700">{header}</PopoverHeader>
         <PopoverBody>
           <VStack gap={2}>

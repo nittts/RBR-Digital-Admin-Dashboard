@@ -12,9 +12,7 @@ export default function ThemeProvider({ children }: ProviderProps) {
     styles.global = { body: { bg: "gray.300" } };
   }
 
-  const customizedTheme = extendTheme({
-    styles: {},
-  });
+  const customizedTheme = extendTheme({ styles });
 
   return (
     <ChakraProvider theme={customizedTheme} portalZIndex={40}>

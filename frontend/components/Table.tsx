@@ -10,12 +10,14 @@ import {
   Text,
   Thead,
   Tr,
+  useBreakpointValue,
 } from "@chakra-ui/react";
+
 import { useCallback, useEffect, useState } from "react";
-import { useBreakpointValue } from "@chakra-ui/react";
 import dayjs from "dayjs";
-import { TableProps } from "@/@types/table.types";
 import { ImArrowDown } from "react-icons/im";
+
+import { TableProps } from "@/@types/table.types";
 
 function compareValues(a: string | number | Date, b: string | number | Date) {
   if (typeof a === "string" && typeof b === "string") {

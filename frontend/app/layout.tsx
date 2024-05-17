@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-
+import { Flex } from "@chakra-ui/react";
 import { Roboto } from "next/font/google";
 
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+
 import Providers from "@/provider";
 import Header from "@/components/Header";
-import { Flex } from "@chakra-ui/react";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 

@@ -11,14 +11,7 @@ export default function DatePickerBackButton(props: SingleDatepickerBackButtonsP
 
   return (
     <>
-      <Button
-        {...getBackProps({
-          calendars,
-          offset: 12,
-        })}
-        variant="ghost"
-        size="sm"
-      >
+      <Button {...getBackProps({ calendars, offset: 12 })} variant="ghost" size="sm">
         {"<<"}
       </Button>
       <Button {...getBackProps({ calendars })} variant="ghost" size="sm">
