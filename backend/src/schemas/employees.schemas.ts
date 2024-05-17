@@ -17,6 +17,7 @@ export const createEmployeePayload = z.object({
   name: z.string({ message: "O nome deve ser um texto válido." }),
   role: z.nativeEnum(Roles, { message: "Cargo do funcionário inválido." }),
   department: z.nativeEnum(Departments, { message: "Departamento inválido ou inexistente" }),
+  admissionDate: z.coerce.date(),
 });
 
 export const updateEmployeePayload = createEmployeePayload.partial();
