@@ -1,36 +1,46 @@
-import { ColorScheme } from "@/@types/theme";
-import { Table as ChakraTable, Flex, TableCaption, Tbody, Td, Thead, Tr } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import {
+  Box,
+  Table as ChakraTable,
+  Fade,
+  Flex,
+  Progress,
+  TableCaption,
+  Tbody,
+  Td,
+  Text,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
 import { useBreakpointValue } from "@chakra-ui/react";
+import dayjs from "dayjs";
+import { TableProps } from "@/@types/table.types";
+import { ImArrowDown } from "react-icons/im";
 
-type Columns = {
-  key: string;
-  header: ReactNode | string;
-  format?: (data: any) => string | ReactNode | number;
-};
+function compareValues(a: string | number | Date, b: string | number | Date) {
+  if (typeof a === "string" && typeof b === "string") {
+    return a.localeCompare(b, undefined, { numeric: true });
+  } else if (typeof a === "number" && typeof b === "number") {
+    return a - b;
+  }
 
-type Data = any;
+  return 0;
+}
 
-type TableProps = {
-  caption: string;
-  columns: Columns[];
-  rows: Data[];
-  size?: "sm" | "md" | "lg";
-  variant?: "simple" | "striped" | "unstyled";
-  colorScheme?: ColorScheme;
-  noDataMessage?: string;
-};
+function parseValue(value: string | number | Date) {
+  if (dayjs(value).isValid()) {
+    return dayjs(value).unix();
+  }
+
+  if (typeof value === "string") return value;
+
+  return value;
+}
 
 export default function Table(props: TableProps) {
-  const {
-    caption,
-    columns = [],
-    rows = [],
-    size,
-    variant = "striped",
-    colorScheme,
-    noDataMessage = "Sem Registros",
-  } = props;
+  const { columns = [], rows = [], variant = "striped", noDataMessage = "Sem Registros" } = props;
+  const [visibleRows, setVisibleRows] = useState(rows);
+  const [activeOrder, setActiveOrder] = useState("");
 
   const isSmall = useBreakpointValue({
     fallback: true,
@@ -42,25 +52,66 @@ export default function Table(props: TableProps) {
     "2xl": false,
   });
 
-  const generateColumns = () => {
+  const handleOrder = useCallback(
+    (key: string) => {
+      const newRows = [...visibleRows];
+
+      setActiveOrder((prev) => (prev === key ? "" : key));
+
+      if (activeOrder === key) {
+        return setVisibleRows(rows);
+      }
+
+      const sortedRows = newRows.sort((a, b) => {
+        const aValue = parseValue(a[key]);
+        const bValue = parseValue(b[key]);
+
+        return compareValues(aValue, bValue);
+      });
+
+      setVisibleRows(sortedRows);
+    },
+    [activeOrder, rows, visibleRows]
+  );
+
+  const generateColumns = useCallback(() => {
     if (isSmall) {
       return (
         <Td>
           <Flex direction="column" gap={2}>
-            {columns.map(({ key, header }, index) => (
-              <p key={`${key}-table-row-${index}`}>{header}</p>
+            {columns.map(({ key, header, disableOrder }, index) => (
+              <p
+                key={`${key}-table-row-${index}`}
+                onClick={() => disableOrder === undefined && !disableOrder && handleOrder(key)}
+              >
+                <Flex gap={2} alignItems="flex-end">
+                  {header}
+                  <Fade in={activeOrder === key}>
+                    <ImArrowDown />
+                  </Fade>
+                </Flex>
+              </p>
             ))}
           </Flex>
         </Td>
       );
     }
 
-    return columns.map((col) => <Td key={col.key}>{col.header}</Td>);
-  };
+    return columns.map(({ key, header, disableOrder }) => (
+      <Td key={key} onClick={() => disableOrder === undefined && !disableOrder && handleOrder(key)}>
+        <Flex gap={2} alignItems="flex-end">
+          {header}
+          <Fade in={activeOrder === key}>
+            <ImArrowDown />
+          </Fade>
+        </Flex>
+      </Td>
+    ));
+  }, [columns, handleOrder, isSmall, activeOrder]);
 
-  const generateRows = () => {
+  const generateRows = useCallback(() => {
     if (isSmall) {
-      return rows.map((row, index) => (
+      return visibleRows.map((row, index) => (
         <Tr key={`${row.id}-${index}`}>
           <Td>
             <Flex direction="column" gap={2}>
@@ -73,18 +124,29 @@ export default function Table(props: TableProps) {
       ));
     }
 
-    return rows.map((row, index) => (
+    return visibleRows.map((row, index) => (
       <Tr key={`${row.id}-${index}`}>
         {columns.map(({ key, format }, index) => (
           <Td key={`${row[key]}-${index}`}>{format ? format(row[key]) : row[key]}</Td>
         ))}
       </Tr>
     ));
-  };
+  }, [columns, isSmall, visibleRows]);
+
+  useEffect(() => setVisibleRows(rows), [rows]);
+
+  if (props.fetching) {
+    return (
+      <Box flex={1} paddingX={2} gap={2} textAlign="center">
+        <Progress size="md" isIndeterminate />
+        <Text>Buscando dados da tabela...</Text>
+      </Box>
+    );
+  }
 
   return (
-    <ChakraTable size={size} variant={variant} colorScheme={colorScheme}>
-      <TableCaption placement="bottom">{rows.length === 0 ? noDataMessage : caption}</TableCaption>
+    <ChakraTable size={props.size} variant={variant} colorScheme={props.colorScheme}>
+      <TableCaption placement="bottom">{rows.length === 0 ? noDataMessage : props.caption}</TableCaption>
       <Thead>
         <Tr>{generateColumns()}</Tr>
       </Thead>
