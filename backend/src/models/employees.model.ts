@@ -1,7 +1,12 @@
 import mongoose from "mongoose";
-import { Departments } from "../enums/departments.enum";
+import { v4 } from "uuid";
 
 const EmployeeSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    default: v4,
+    index: true,
+  },
   name: {
     type: String,
     required: true,

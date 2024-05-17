@@ -11,11 +11,10 @@ class AppError extends Error {
 
 const errorHandling = (err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof AppError) {
-    return res.status(err.statusCode).json({ message: err.message, success: false });
+    res.status(err.statusCode).json({ message: err.message, statusCode: err.statusCode });
   }
-  console.error(err);
 
-  res.status(500).json({ message: "Internal server error", success: false });
+  res.status(500).json({ message: "Erro de Servidor Interno.", statusCode: 500 });
 };
 
 export { AppError, errorHandling };

@@ -1,5 +1,6 @@
 import Express, { Router } from "express";
 import { readdirSync } from "fs";
+import { errorHandling } from "../middlewares/asyncErrors.middleware";
 
 const routes = (app: Express.Application) => {
   readdirSync(__dirname).forEach(async (path) => {
@@ -7,9 +8,11 @@ const routes = (app: Express.Application) => {
 
     if (routeName !== "index") {
       const { default: route } = await import(`./${routeName}`);
-      const router = Router();
+      const router = route(Router());
 
-      app.use(`/api/${routeName}`, route(router));
+      router.use(errorHandling);
+
+      app.use(`/api/${routeName}`, router);
     }
   });
 };

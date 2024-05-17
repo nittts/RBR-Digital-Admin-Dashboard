@@ -9,6 +9,14 @@ class EmployeesController {
 
     return res.status(200).send(employees);
   }
+
+  async findById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const employee = await employeesService.findById({ id });
+
+    return res.status(200).send(employee);
+  }
 }
 
 export default new EmployeesController();

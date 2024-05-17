@@ -14,7 +14,7 @@ const constructErrorObject = (error: ZodError) => {
 };
 
 export const ZodValidator =
-  (schema: ZodType, metadataType: "query" | "body") => (req: Request, res: Response, next: NextFunction) => {
+  (schema: ZodType, metadataType: "query" | "body" | "params") => (req: Request, res: Response, next: NextFunction) => {
     const data = req[metadataType];
 
     const parsedData = schema.safeParse(data);

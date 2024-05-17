@@ -1,8 +1,8 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { config } from "dotenv";
-
+import "express-async-errors";
 import { errorHandling } from "./middlewares/asyncErrors.middleware";
 import rateLimiterMiddleware from "./middlewares/raterLimiter.middleware";
 
@@ -29,9 +29,6 @@ connectMongo();
 
 // Define routes
 routes(app);
-
-// Async error Handling
-app.use(errorHandling);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Server Running!");
