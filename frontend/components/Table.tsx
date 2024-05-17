@@ -80,17 +80,21 @@ export default function Table(props: TableProps) {
         <Td>
           <Flex direction="column" gap={2}>
             {columns.map(({ key, header, disableOrder }, index) => (
-              <p
-                key={`${key}-table-row-${index}`}
-                onClick={() => disableOrder === undefined && !disableOrder && handleOrder(key)}
-              >
-                <Flex gap={2} alignItems="flex-end">
-                  {header}
-                  <Fade in={activeOrder === key}>
-                    <ImArrowDown />
-                  </Fade>
-                </Flex>
-              </p>
+              <Fade in={!!columns} key={`${key}-table-row-${index}`}>
+                <Box
+                  cursor={disableOrder === undefined && !disableOrder ? "pointer" : "default"}
+                  onClick={() => disableOrder === undefined && !disableOrder && handleOrder(key)}
+                  _hover={{ color: "blue.300" }}
+                  color={activeOrder === key ? "blue.300" : "inherit"}
+                >
+                  <Flex gap={2} alignItems="flex-end">
+                    {header}
+                    <Fade in={activeOrder === key}>
+                      <ImArrowDown color="#63b3ed" />
+                    </Fade>
+                  </Flex>
+                </Box>
+              </Fade>
             ))}
           </Flex>
         </Td>
@@ -98,13 +102,19 @@ export default function Table(props: TableProps) {
     }
 
     return columns.map(({ key, header, disableOrder }) => (
-      <Td key={key} onClick={() => disableOrder === undefined && !disableOrder && handleOrder(key)}>
-        <Flex gap={2} alignItems="flex-end">
-          {header}
-          <Fade in={activeOrder === key}>
-            <ImArrowDown />
-          </Fade>
-        </Flex>
+      <Td
+        key={key}
+        onClick={() => disableOrder === undefined && !disableOrder && handleOrder(key)}
+        cursor={disableOrder === undefined && !disableOrder ? "pointer" : "default"}
+      >
+        <Fade in={!!columns}>
+          <Flex gap={2} alignItems="flex-end">
+            {header}
+            <Fade in={activeOrder === key}>
+              <ImArrowDown />
+            </Fade>
+          </Flex>
+        </Fade>
       </Td>
     ));
   }, [columns, handleOrder, isSmall, activeOrder]);
@@ -115,8 +125,13 @@ export default function Table(props: TableProps) {
         <Tr key={`${row.id}-${index}`}>
           <Td>
             <Flex direction="column" gap={2}>
-              {columns.map(({ key, format }, index) => (
-                <p key={`${key}-table-row-${index}`}>{format ? format(row[key]) : row[key]}</p>
+              {columns.map(({ key, format, header }, index) => (
+                <Fade in={!!visibleRows} key={`${key}-table-row-${index}`}>
+                  <Flex gap={2} alignItems="center" justifyContent="space-between">
+                    <Text>{header}:</Text>
+                    {format ? format(row[key]) : row[key]}
+                  </Flex>
+                </Fade>
               ))}
             </Flex>
           </Td>
@@ -126,8 +141,10 @@ export default function Table(props: TableProps) {
 
     return visibleRows.map((row, index) => (
       <Tr key={`${row.id}-${index}`}>
-        {columns.map(({ key, format }, index) => (
-          <Td key={`${row[key]}-${index}`}>{format ? format(row[key]) : row[key]}</Td>
+        {columns.map(({ key, format, header }, index) => (
+          <Td key={`${row[key]}-${index}`}>
+            <Fade in={!!visibleRows}>{format ? format(row[key]) : row[key]}</Fade>
+          </Td>
         ))}
       </Tr>
     ));

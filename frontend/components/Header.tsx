@@ -1,8 +1,9 @@
 "use client";
 
-import { Button, Flex, Tooltip, useColorMode } from "@chakra-ui/react";
+import { Button, Flex, HStack, Tooltip, useColorMode } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
+import BackButton from "./BackButton";
 
 export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -16,17 +17,25 @@ export default function Header() {
       marginX="1vw"
       marginY="1vh"
       shadow="lg"
+      alignItems="center"
     >
-      <Heading as="h4" size={["md", "md", "lg", "lg"]} flex="1">
+      <Heading as="h4" size={["sm", "md", "lg", "lg"]} flex="1" textAlign="center">
         Painel Administrador de Funcionários
       </Heading>
-      <Tooltip label={`${colorMode === "light" ? "Ativar" : "Desativer"} modo escuro`}>
-        <span>
-          <Button onClick={toggleColorMode} background="blue.700" _hover={{ background: "blue.500" }} color="white">
-            {colorMode === "light" ? <BsMoonFill /> : <BsSunFill />}
-          </Button>
-        </span>
-      </Tooltip>
+      <HStack>
+        <Tooltip label={`${colorMode === "light" ? "Ativar" : "Desativer"} modo escuro`}>
+          <span>
+            <Button onClick={toggleColorMode} background="blue.700" _hover={{ background: "blue.500" }} color="white">
+              {colorMode === "light" ? <BsMoonFill /> : <BsSunFill />}
+            </Button>
+          </span>
+        </Tooltip>
+        <Tooltip label="Voltar">
+          <span>
+            <BackButton />
+          </span>
+        </Tooltip>
+      </HStack>
     </Flex>
   );
 }

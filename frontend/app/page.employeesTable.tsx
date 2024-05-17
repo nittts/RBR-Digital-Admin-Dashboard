@@ -15,6 +15,7 @@ import { formatterUtils } from "@/utils/formatters";
 import { Button, Flex, OrderedList, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
+import { BiEdit } from "react-icons/bi";
 
 type EmployeesTableProps = {
   filters: EmployeeFilters;
@@ -72,10 +73,12 @@ export default function EmployeesTable({ filters }: EmployeesTableProps) {
         actions: (
           <Flex gap={2}>
             <Button
+              size="md"
               background="blue.500"
               _hover={{ backgroundColor: "blue.300" }}
               onClick={() => router.push(`/${employee.id}`)}
               color="white"
+              leftIcon={<BiEdit />}
             >
               Editar
             </Button>

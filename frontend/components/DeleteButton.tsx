@@ -12,6 +12,7 @@ import {
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
+import { BiTrash } from "react-icons/bi";
 
 type PopoverProps = {
   trigger: string;
@@ -27,7 +28,13 @@ export default function DeleteButton({ trigger, header, description, onConfirm, 
   return (
     <Popover isOpen={isOpen}>
       <PopoverTrigger>
-        <Button background="red.500" color="white" _hover={{ backgroundColor: "red.300" }} onClick={onToggle}>
+        <Button
+          background="red.500"
+          color="white"
+          _hover={{ backgroundColor: "red.300" }}
+          onClick={onToggle}
+          leftIcon={<BiTrash />}
+        >
           {trigger}
         </Button>
       </PopoverTrigger>

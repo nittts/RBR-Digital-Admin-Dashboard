@@ -24,10 +24,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={roboto.className}>
         <Providers>
           <Header />
-          <Flex direction="column" gap={3} alignItems="center" paddingX="1vw">
+          <Flex direction="column" gap={3} alignItems="center" paddingX="1vw" paddingBottom="2vh">
             {children}
           </Flex>
-          <BackButton />
         </Providers>
       </body>
     </html>

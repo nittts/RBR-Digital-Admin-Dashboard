@@ -4,13 +4,13 @@ import { Tag } from "@chakra-ui/react";
 
 export default function RoleTag({ tag }: { tag: Roles }) {
   const roleTagColorMap = {
-    MANAGER: "red.500",
-    SUPERVISOR: "teal.500",
-    EMPLOYEE: "green.500",
+    MANAGER: "red.700",
+    SUPERVISOR: "teal.700",
+    EMPLOYEE: "green.700",
   };
 
   return (
-    <Tag background={roleTagColorMap[tag]} padding={2} variant="solid">
+    <Tag background={roleTagColorMap[tag]} padding="1vh" variant="solid" textAlign="center">
       {rolesToPt(tag, true)}
     </Tag>
   );
