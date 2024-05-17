@@ -23,8 +23,6 @@ class EmployeesService {
   async create(payload: CreateEmployeePayload) {
     const employee = await employeesModel.create(payload);
 
-    await employee.save();
-
     return employee;
   }
 
