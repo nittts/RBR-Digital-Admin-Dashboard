@@ -10,7 +10,7 @@ import {
   employeesSearchParams,
   findById,
   updateEmployeePayload,
-} from "../services/employees/etc/schemas";
+} from "../schemas/employees.schemas";
 
 export default (router: Router) => {
   router.get("/", ZodValidator(employeesSearchParams, "query"), employeesController.index);

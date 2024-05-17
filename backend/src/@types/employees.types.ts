@@ -1,5 +1,5 @@
 import z from "zod";
-import * as schemas from "./schemas";
+import * as schemas from "../schemas/employees.schemas";
 
 export type EmployeesSearchParams = z.infer<typeof schemas.employeesSearchParams>;
 export type FindById = z.infer<typeof schemas.findById>;

@@ -1,6 +1,11 @@
 import { AppError } from "../../middlewares/asyncErrors.middleware";
 import employeesModel from "../../models/employees.model";
-import { CreateEmployeePayload, EmployeesSearchParams, FindById, updateEmployeePayload } from "./etc/types";
+import {
+  CreateEmployeePayload,
+  EmployeesSearchParams,
+  FindById,
+  updateEmployeePayload,
+} from "../../@types/employees.types";
 
 class EmployeesService {
   async findAll(filters: EmployeesSearchParams) {

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Departments } from "../../../enums/departments.enum";
-import { Roles } from "../../../enums/roles.enum";
+import { Departments } from "../enums/departments.enum";
+import { Roles } from "../enums/roles.enum";
 
 export const employeesSearchParams = z.object({
   name: z.string().optional(),
