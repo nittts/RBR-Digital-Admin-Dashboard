@@ -40,7 +40,7 @@ export default function DeleteButton({ trigger, header, description, onConfirm, 
       </PopoverTrigger>
       <PopoverContent>
         <PopoverArrow />
-        <PopoverCloseButton />
+        <PopoverCloseButton onClick={onClose} />
 
         <PopoverHeader fontWeight="700">{header}</PopoverHeader>
         <PopoverBody>

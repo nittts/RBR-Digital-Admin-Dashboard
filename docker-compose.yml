@@ -10,8 +10,6 @@ services:
       - 3000:3000
     networks:
       - network-admin-panel
-    env_file:
-      - ./frontend/docker.env
 
   mongo:
     container_name: admin_panel_database

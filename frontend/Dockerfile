@@ -10,6 +10,10 @@ RUN yarn
 
 COPY . . 
 
+ENV BASE_URL="http://api:8080"
+
+ENV NEXT_PUBLIC_BASE_URL="http://localhost:8080"
+
 RUN yarn build
 
 EXPOSE 3000
