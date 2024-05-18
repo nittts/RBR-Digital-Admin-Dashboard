@@ -80,6 +80,8 @@ Para realizar a criação das imagens, após isso rode:
   docker-compose up
 ```
 
+Para iniciar o servidor
+
 ## Autores
 
 - [@Nitts](https://www.github.com/nittts)
@@ -88,4 +90,3 @@ Para realizar a criação das imagens, após isso rode:
 
 - [Como Instalar Docker (Windows)](https://gist.github.com/sidneyroberto/5f0b837c2d27f791fc494c164d2a7d74)
 - [Como Instalar Docker (Linux)](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt)
-- [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
